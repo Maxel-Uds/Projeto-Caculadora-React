@@ -4,7 +4,18 @@ import './Calculator.css';
 import Button from '../components/Button';
 import Display from '../components/Display';
 
+const initialState = {
+    displayValue: '0',
+    clearDisplay: false,
+    operation: null,
+    values: [0, 0],
+    current: 0
+}
+
 export default class Calculator extends Component {
+
+    state = { ...initialState }
+
     constructor(props) {
         super(props);
 
@@ -16,7 +27,7 @@ export default class Calculator extends Component {
     render() {
         return (
             <div className="calculator">
-                <Display value={1000}/>
+                <Display value={this.state.displayValue} clearDisplay={this.clearDisplay}/>
                 <Button label="AC" triple click={this.clearDisplay}/>
                 <Button label="/" operation click={this.setOperation}/>
                 <Button label="7" click={this.addDigit}/>
@@ -40,7 +51,7 @@ export default class Calculator extends Component {
     }
 
     clearDisplay() {
-        console.log('limpar');
+        this.setState({ ...initialState });
     }
 
     setOperation(operation) {
@@ -48,6 +59,19 @@ export default class Calculator extends Component {
     }
 
     addDigit(digit) {
-        console.log(digit);
+        if(!(digit === '.' && this.state.displayValue.includes('.'))) {
+            const clear = this.state.displayValue === '0' || this.state.clearDisplay;
+            const currentValue = clear ? '' : this.state.displayValue;
+            const display = currentValue + digit;
+            this.setState({ displayValue: display, clearDisplay: false });
+
+            if(digit !== '.') {
+                const index = this.state.current;
+                const newValue = parseFloat(display);
+                const values = [...this.state.values];
+                values[index] = newValue;
+                this.setState({ values });
+            }
+        }
     }
 }
