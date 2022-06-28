@@ -1,0 +1,19 @@
+:root {
+    --bg-display: #fff;
+    --border-display: solid 1px #888;
+}
+
+.display {
+    /* Diz quantas linhas da grid o elemento vai ocupar */
+    grid-column: span 4;
+    font-size: 2em;
+    background-color: var(--bg-display);
+    color: black;
+    border-bottom: var(--border-display);
+    border-right: var(--border-display);
+
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+    overflow: hidden;
+}

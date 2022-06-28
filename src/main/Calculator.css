@@ -8,6 +8,6 @@
     display: grid;
     /* Estabelece que o grid terá quatro colunas onde cada elemento ocupa 25% das colunas */
     grid-template-columns: repeat(4, 25%);
-    /* Estabelece a altura das cinco linhas */
-    grid-template-rows: 48px 48px 48px 48px 48px;
+    /* Estabelece a altura das linhas do grid */
+    grid-template-rows: 50px 48px 48px 48px 48px 48px;
 }
