@@ -19,7 +19,7 @@ export default class Calculator extends Component {
     constructor(props) {
         super(props);
 
-        this.clearDisplay = this.clearDisplay.bind(this);
+        this.clearMemory = this.clearMemory.bind(this);
         this.setOperation = this.setOperation.bind(this);
         this.addDigit = this.addDigit.bind(this);       
     }
@@ -27,8 +27,8 @@ export default class Calculator extends Component {
     render() {
         return (
             <div className="calculator">
-                <Display value={this.state.displayValue} clearDisplay={this.clearDisplay}/>
-                <Button label="AC" triple click={this.clearDisplay}/>
+                <Display value={this.state.displayValue}/>
+                <Button label="AC" triple click={this.clearMemory}/>
                 <Button label="/" operation click={this.setOperation}/>
                 <Button label="7" click={this.addDigit}/>
                 <Button label="8" click={this.addDigit}/>
@@ -50,12 +50,36 @@ export default class Calculator extends Component {
         )
     }
 
-    clearDisplay() {
+    clearMemory() {
         this.setState({ ...initialState });
     }
 
     setOperation(operation) {
-        console.log(operation);
+        if(this.state.current === 0) {
+            this.setState({ clearDisplay: true, current: 1, operation });
+        }
+        else {
+            const equals = operation === '=';
+            const currentOperation = this.state.operation;
+            const values = [...this.state.values];
+
+            try {
+                values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`);
+            }
+            catch(e) {
+                values[0] = this.state.values[0];
+            }
+            
+            values[1] = 0;
+
+            this.setState({ 
+                displayValue: values[0],  
+                values,
+                operation: equals ? null : operation, 
+                current: equals ? 0 : 1, 
+                clearDisplay: !equals,
+            });
+        }
     }
 
     addDigit(digit) {
