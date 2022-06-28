@@ -3,5 +3,11 @@
     width: 235px;
     border-radius: 5px;
     overflow: hidden;
-    background-color: red;
+
+    /* Cria um grid */
+    display: grid;
+    /* Estabelece que o grid terá quatro colunas onde cada elemento ocupa 25% das colunas */
+    grid-template-columns: repeat(4, 25%);
+    /* Estabelece a altura das cinco linhas */
+    grid-template-rows: 48px 48px 48px 48px 48px;
 }
