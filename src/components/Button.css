@@ -28,3 +28,14 @@
 .button.operation:active {
     background-color: #994914;
 }
+
+.button.buttonLogo:active {
+    background-color: var(--bg-button);
+}
+
+.button.buttonLogo {
+    background-image: url(../../public/logo192.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}

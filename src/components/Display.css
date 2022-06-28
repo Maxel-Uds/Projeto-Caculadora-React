@@ -4,7 +4,7 @@
 }
 
 .display {
-    /* Diz quantas linhas da grid o elemento vai ocupar */
+    /* Diz quantas colunas da grid o elemento vai ocupar */
     grid-column: span 4;
     font-size: 2em;
     background-color: var(--bg-display);
