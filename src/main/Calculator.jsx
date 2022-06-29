@@ -55,10 +55,10 @@ export default class Calculator extends Component {
     }
 
     setOperation(operation) {
-        if(this.state.current === 0) {
+        if(this.state.current === 0 && this.state.values[0] !== 0 && operation !== '=') {
             this.setState({ clearDisplay: true, current: 1, operation });
         }
-        else {
+        else if(this.state.values[1] !== 0) {
             const equals = operation === '=';
             const currentOperation = this.state.operation;
             const values = [...this.state.values];
@@ -73,7 +73,7 @@ export default class Calculator extends Component {
             values[1] = 0;
 
             this.setState({ 
-                displayValue: values[0],  
+                displayValue: values[0].toLocaleString('en-IN', { maximumFractionDigits: 3}),  
                 values,
                 operation: equals ? null : operation, 
                 current: equals ? 0 : 1, 
